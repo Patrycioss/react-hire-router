@@ -1,16 +1,21 @@
 import {Link} from "react-router-dom";
 
 function PeopleListItem(props) {
-    const {person} = props
+    const {person, canEdit} = props
+
+    const personId = person.name.first + '_' + person.name.last;
 
     return (
         <li>
-            <Link to={"/view/" + person.name.first + '_' + person.name.last}>
+            <Link to={"/view/" + personId}>
                 <h3>
                     {person.name.first} {person.name.last}
+
                 </h3>
             </Link>
-            {person.wage && <p>Wage: £{person.wage}</p>}
+            {canEdit && (
+                <Link to={"/edit/" + personId}>Edit</Link>
+            )}
         </li>
     )
 }

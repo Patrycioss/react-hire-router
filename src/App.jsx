@@ -19,6 +19,15 @@ export default function App() {
         setHiredPeople((prevState) => [...prevState, person]);
         console.log(hiredPeople);
     }
+    
+    const onUpdate = (person) => {
+        const index = hiredPeople.findIndex((use) => use.login.uuid === person.login.uuid);
+        
+        if (index > -1) {
+            hiredPeople[index] = person;
+        }
+        setHiredPeople(hiredPeople);
+    }
 
     useEffect(() => {
         fetchRandomPeople();
@@ -28,7 +37,8 @@ export default function App() {
         <div>
             <Routes>
                 <Route path="/" element={<Dashboard randomPeople={randomPeople} hiredPeople={hiredPeople}/>}/>
-                <Route path="/view/:id" element={<PersonProfile people={randomPeople.concat(hiredPeople)} onHire={onHire}/>}/>
+                <Route path="/view/:id" element={<PersonProfile people={randomPeople.concat(hiredPeople)} onHire={onHire} canEdit={false} onUpdate={()=>{}}/>}/>
+                <Route path="/edit/:id" element={<PersonProfile people={hiredPeople} onUpdate={onUpdate} canEdit={true}/>}/>
             </Routes>
 
         </div>
