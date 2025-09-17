@@ -1,19 +1,17 @@
-import { useState } from 'react'
+import {useState} from 'react'
 import './App.css'
+import {Route, Routes} from "react-router-dom";
+import Dashboard from "./pages/Dashboard/index.jsx";
 
 export default function App() {
-  const [hiredPeople, setHiredPeople] = useState([])
+    const [hiredPeople, setHiredPeople] = useState([])
 
-  return (
-    <>
-      <header>
-        <h1>Hire Your Team</h1>
-        <nav>
-          <ul>
-            <li>Dashboard</li>
-          </ul>
-        </nav>
-      </header>
-    </>
-  )
+    return (
+        <div>
+            <Routes>
+                <Route path="/" element={<Dashboard hiredPeople={hiredPeople}/>}/>
+            </Routes>
+
+        </div>
+    )
 }
